@@ -79,6 +79,18 @@ class AuthController {
     try {
       const { email, password } = req.body;
 
+      if (!email || email.trim() === "") {
+        return res.status(400).json({
+          message: "Email is required!",
+        });
+      }
+
+      if (!password || password.trim() === "") {
+        return res.status(400).json({
+          message: "Password is required!",
+        });
+      }
+
       // icheck sa nato if naa ba ang user sa database using email...
       const foundUserQuery =
         "SELECT id, email, password FROM `users` WHERE email=?";
